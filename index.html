@@ -195,21 +195,22 @@
     </ul>
     <!-- ENDS widgets -->
     <div id="footer-bottom">&copy; <script>
-		  const now = new Date();
-		  const year = now.getFullYear();
-		  const month = now.getMonth() + 1; 
-		  const day = now.getDate();
-		  function getWeekNumber(date) {
-						    const tempDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-						    const dayNum = tempDate.getUTCDay() || 7;
-						    tempDate.setUTCDate(tempDate.getUTCDate() + 4 - dayNum);
-						    const yearStart = new Date(Date.UTC(tempDate.getUTCFullYear(), 0, 1));
-						    const weekNumber = Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
-						    return weekNumber;
-						  }
-		  const week = getWeekNumber(now);
-		  document.write(`Week: ${week}, Date: ${month}/${day}/${year}`);
-		</script>>
+					  const now = new Date();
+					
+					  const year = now.getFullYear();
+					  const month = String(now.getMonth() + 1).padStart(2, '0'); // Leading zero
+					  const day = String(now.getDate()).padStart(2, '0'); // Leading zero
+					
+					  function getWeekNumber(date) {
+									    const tempDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+									    const dayNum = tempDate.getUTCDay() || 7;
+									    tempDate.setUTCDate(tempDate.getUTCDate() + 4 - dayNum);
+									    const yearStart = new Date(Date.UTC(tempDate.getUTCFullYear(), 0, 1));
+									    return Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
+									  }
+					  const week = getWeekNumber(now);
+					  document.write(`Hét: ${week}, Dátum: ${year}. ${month}. ${day}.`);
+					</script>
 	    , Made by <a href="http://www.plutoneon.com">Plutoneon</a></div>
   </div>
   <!-- ENDS wrapper -->
