@@ -194,21 +194,22 @@
       </li>
     </ul>
     <!-- ENDS widgets -->
-    <div id="footer-bottom">&copy; <script>document.write(new Date().getFullYear())</script> - 
-	    <script>Date.prototype.getWeek = function () {
-	    var target  = new Date(this.valueOf());
-	    var dayNr   = (this.getDay() + 6) % 7;
-	    target.setDate(target.getDate() - dayNr + 3);
-	    var firstThursday = target.valueOf();
-	    target.setMonth(0, 1);
-	    if (target.getDay() != 4) {
-	        target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
-	    }
-	    return 1 + Math.ceil((firstThursday - target) / 604800000);
-		}
-		
-		var d= new Date();
-		alert(d.getWeek());</script>
+    <div id="footer-bottom">&copy; <script>
+		  const now = new Date();
+		  const year = now.getFullYear();
+		  const month = now.getMonth() + 1; 
+		  const day = now.getDate();
+		  function getWeekNumber(date) {
+						    const tempDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+						    const dayNum = tempDate.getUTCDay() || 7;
+						    tempDate.setUTCDate(tempDate.getUTCDate() + 4 - dayNum);
+						    const yearStart = new Date(Date.UTC(tempDate.getUTCFullYear(), 0, 1));
+						    const weekNumber = Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
+						    return weekNumber;
+						  }
+		  const week = getWeekNumber(now);
+		  document.write(`Week: ${week}, Date: ${month}/${day}/${year}`);
+		</script>>
 	    , Made by <a href="http://www.plutoneon.com">Plutoneon</a></div>
   </div>
   <!-- ENDS wrapper -->
