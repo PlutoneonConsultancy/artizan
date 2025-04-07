@@ -194,19 +194,22 @@
       </li>
     </ul>
     <!-- ENDS widgets -->
-<div id="footer-bottom"><script>
-	    const now = new Date();
- 		const year = now.getFullYear();
- 			const monthIndex = now.getMonth();
-			    const day = now.getDate();
-			    const weekdayIndex = now.getDay();
-			    const weekdaysHu = ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"];
-			    const weekdayName = weekdaysHu[weekdayIndex];
-			    const monthsHu = [
-			      "január", "február", "március", "április", "május", "június",
-			      "július", "augusztus", "szeptember", "október", "november", "december"
-				    ];
-				    const monthName = monthsHu[monthIndex];
+  <div id="footer-bottom">
+    <div id="output"></div>
+    <script>
+      window.onload = function() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const monthIndex = now.getMonth();
+        const day = now.getDate();
+        const weekdayIndex = now.getDay();
+        const weekdaysHu = ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"];
+        const weekdayName = weekdaysHu[weekdayIndex];
+        const monthsHu = [
+          "január", "február", "március", "április", "május", "június",
+          "július", "augusztus", "szeptember", "október", "november", "december"
+        ];
+        const monthName = monthsHu[monthIndex];
 				    const nameDays = {
 						  "01-01": ["Fruzsina"],
 						  "01-02": ["Ábel"],
@@ -573,26 +576,30 @@
 						  "12-29": ["Tamás"],
 						  "12-30": ["Dávid"],
 						  "12-31": ["Szilveszter"]
-				    	};
-					    const monthStr = String(monthIndex + 1).padStart(2, '0');
-					    	const dayStr = String(day).padStart(2, '0');
-					    		const dateKey = `${monthStr}-${dayStr}`;
-					    			const todaysNameDays = nameDays[dateKey] || ["(nincs adat)"];
-					
-					    function getWeekNumber(date) {
-					      	const tempDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-					      		const dayNum = tempDate.getUTCDay() || 7;
-					      			tempDate.setUTCDate(tempDate.getUTCDate() + 4 - dayNum);
-					      				const yearStart = new Date(Date.UTC(tempDate.getUTCFullYear(), 0, 1));
-					      					return Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
-					    			}
-						    const week = getWeekNumber(now);
-					    document.getElementById("output").innerHTML = `
-					      	<strong>Hét:</strong> ${week}, <strong>Dátum:</strong> ${year}. ${monthName} ${day}. (${weekdayName})<br>
-						      <strong>Névnap(ok):</strong> ${todaysNameDays.join(", ")}
-				    `;
-			  </script>
-	  | Minden jog fenntartva  &copy;  - Made by <a href="http://www.plutoneon.com">Plutoneon</a></div>
+      				  };
+
+	        const monthStr = String(monthIndex + 1).padStart(2, '0');
+	        	const dayStr = String(day).padStart(2, '0');
+	        		const dateKey = `${monthStr}-${dayStr}`;
+	        			const todaysNameDays = nameDays[dateKey] || ["(nincs adat)"];
+	
+	        function getWeekNumber(date) {
+		          const tempDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+		          	const dayNum = tempDate.getUTCDay() || 7;
+		          tempDate.setUTCDate(tempDate.getUTCDate() + 4 - dayNum);
+		          	const yearStart = new Date(Date.UTC(tempDate.getUTCFullYear(), 0, 1));
+		          		return Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
+		        }
+	
+	        const week = getWeekNumber(now);
+	
+	        document.getElementById("output").innerHTML = `
+	          <strong>Hét:</strong> ${week}, <strong>Dátum:</strong> ${year}. ${monthName} ${day}. (${weekdayName})<br>
+	          <strong>Névnap(ok):</strong> ${todaysNameDays.join(", ")}
+        `;
+      };
+    </script>
+    <p>Minden jog fenntartva &copy; - Made by <a href="http://www.plutoneon.com">Plutoneon</a></p>
   </div>
   <!-- ENDS wrapper -->
 </footer>
